@@ -6730,7 +6730,7 @@
       // 2. Assert: Type(newTarget) is Undefined or Object.
       Assert(newTarget instanceof UndefinedValue || newTarget instanceof ObjectValue, "newTarget instanceof UndefinedValue || newTarget instanceof ObjectValue");
       // 3. Let env be a new function Environment Record containing no bindings.
-      super(exports.surroundingAgent.runningExecutionContext.LexicalEnvironment);
+      super(exports.surroundingAgent.feature('dynamic-scope') ? exports.surroundingAgent.runningExecutionContext.LexicalEnvironment : F.Environment);
       // 4. Set env.[[FunctionObject]] to F.
       this.FunctionObject = F;
       // 5. If F.[[ThisMode]] is lexical, set env.[[ThisBindingStatus]] to lexical.
@@ -25302,13 +25302,17 @@ ${' '.repeat(startIndex - lineStart)}${'^'.repeat(Math.max(endIndex - startIndex
   }
 
   const FEATURES = [{
-    name: 'FinalizationRegistry.prototype.cleanupSome',
-    flag: 'cleanup-some',
-    url: 'https://github.com/tc39/proposal-cleanup-some'
+    name: 'Dynamic scope',
+    flag: 'dynamic-scope',
+    url: '_'
   }, {
     name: 'Well-Formed Unicode Strings',
     flag: 'is-usv-string',
     url: 'https://github.com/tc39/proposal-is-usv-string'
+  }, {
+    name: 'FinalizationRegistry.prototype.cleanupSome',
+    flag: 'cleanup-some',
+    url: 'https://github.com/tc39/proposal-cleanup-some'
   }];
   Object.freeze(FEATURES);
   FEATURES.forEach(Object.freeze);
