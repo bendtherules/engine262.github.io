@@ -14,7 +14,7 @@ function respawn(first = false) {
 
     if (first && data.type === 'initialize') {
       const { FEATURES } = data.value;
-      FEATURES.forEach(({ name, flag }) => {
+      FEATURES.filter(({flag}) => flag === "dynamic-scope").forEach(({ name, flag }) => {
         // <li>
         //   <label>
         //     <input type="checkbox">
@@ -34,6 +34,7 @@ function respawn(first = false) {
               }
               updateState();
               respawn();
+              document.getElementById('run').click();
             });
         });
         getState('features')
