@@ -1,5 +1,5 @@
 /*!
- * engine262 0.0.1 bf8109c0053ca9cfe22a53d406a34edd8941159d
+ * engine262 0.0.1 498b20f6b6bcf29903489746d2a1ae4feb197bd2
  *
  * Copyright (c) 2018 engine262 Contributors
  * 
@@ -7410,7 +7410,7 @@
     } else {
       // a. Let outer be env.[[OuterEnv]].
       let outer = env.OuterEnv;
-      if (name.value.startsWith('local_') && env instanceof FunctionEnvironmentRecord) {
+      if (exports.surroundingAgent.feature('local-dynamic-scope') && name.value.startsWith('local_') && env instanceof FunctionEnvironmentRecord) {
         outer = env.callerScope;
         name = new JSStringValue(name.stringValue().slice(6));
       }
@@ -25311,6 +25311,10 @@ ${' '.repeat(startIndex - lineStart)}${'^'.repeat(Math.max(endIndex - startIndex
   const FEATURES = [{
     name: 'Dynamic scope',
     flag: 'dynamic-scope',
+    url: '_'
+  }, {
+    name: 'local_{var}',
+    flag: 'local-dynamic-scope',
     url: '_'
   }, {
     name: 'Well-Formed Unicode Strings',

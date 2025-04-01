@@ -14,7 +14,7 @@ function respawn(first = false) {
 
     if (first && data.type === 'initialize') {
       const { FEATURES } = data.value;
-      FEATURES.filter(({flag}) => flag === "dynamic-scope").forEach(({ name, flag }) => {
+      FEATURES.filter(({flag}) => flag.includes("dynamic-scope")).forEach(({ name, flag }) => {
         // <li>
         //   <label>
         //     <input type="checkbox">
